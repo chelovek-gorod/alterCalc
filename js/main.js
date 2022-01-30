@@ -76,13 +76,6 @@ class Garret {
 const visualImg = document.getElementById('visualImg');
 const visualImagePath = '';
 
-const endSides = 4; // use in bricks in line P pcs count: bricksInLineP = (P - brickWidth * endSides) / brickLength
-const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P - brickWidth * k_Pinner) / blockLength
-let externalPerimeter;
-let innerPerimeter; // 
-
-// ***
-
 function getChangedValue(id) {
     let value = Number(id.value.replace(',', '.'));
     let min = Number(id.min);
@@ -100,6 +93,15 @@ function getChangedValue(id) {
 
 // ***
 
+function changeVisualImageBase(type) {
+    if (type === 'f') changeVisualImageTo('house_wall_type_f.png');
+    else {
+        if (input.radioBaseBrick === true) changeVisualImageTo((type === 'f_') ? 'house_wall_type_f_k.png' : 'house_wall_type_k.png');
+        else if (input.radioBaseBlockCeramic === true) changeVisualImageTo((type === 'f_') ? 'house_wall_type_f_b.png' : 'house_wall_type_b.png');
+        else if (input.radioBaseBlockSilicate === true) changeVisualImageTo((type === 'f_') ? 'house_wall_type_f_p.png' : 'house_wall_type_p.png');
+        else console.log('kan\'t show base image');
+    }
+}
 function changeVisualImageBaseSize() {
     if (input.radioBaseBrick === true) changeVisualImageTo('house_wall_size_f_k.png');
     else if (input.radioBaseBlockCeramic === true) changeVisualImageTo('house_wall_size_f_b.png');
@@ -301,7 +303,14 @@ function deleteGarret(id, key) {
 
 // *** COUNT *** //
 
+const endSides = 4; // use in bricks in line P pcs count: bricksInLineP = (P - brickWidth * endSides) / brickLength
+const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P - brickWidth * k_Pinner) / blockLength
+let externalPerimeter;
+let innerPerimeter; // 
+
 function recalculate() {
     console.log(input);
     console.log('---');
+
+    
 }

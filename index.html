@@ -33,14 +33,14 @@
                     <input type="number" id="inputHeightSize" value="2.50" min="0.01" step="0.01" max="100"> м
                 </label>
             </div>
-            <div id="wallTypeButtonsDiv">
-                <button onmouseover="changeVisualImageTo('house_wall_type_f.png')" onmouseleave="hideVisualImage()" onclick="changeWallType('facade')">
+            <div id="wallTypeButtonsDiv"> <!--changeVisualImageTo('house_wall_type_f.png')--><!--changeVisualImageTo('house_wall_type_f_p.png')--><!--changeVisualImageTo('house_wall_type_p.png')-->
+                <button onmouseover="changeVisualImageBase('f')" onmouseleave="hideVisualImage()" onclick="changeWallType('facade')">
                     Только фасадная кладка
                 </button>
-                <button class="selected" onmouseover="changeVisualImageTo('house_wall_type_f_p.png')" onmouseleave="hideVisualImage()" onclick="changeWallType('all')">
+                <button class="selected" onmouseover="changeVisualImageBase('f_')" onmouseleave="hideVisualImage()" onclick="changeWallType('all')">
                     Фасадная и внутренняя кладка
                 </button>
-                <button onmouseover="changeVisualImageTo('house_wall_type_p.png')" onmouseleave="hideVisualImage()" onclick="changeWallType('base')">
+                <button onmouseover="changeVisualImageBase('')" onmouseleave="hideVisualImage()" onclick="changeWallType('base')">
                     Только внутренняя кладка
                 </button>
             </div>
