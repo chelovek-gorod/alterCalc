@@ -132,6 +132,8 @@ function hideVisualImage() {
 function inputNumberOnchange(id) {
     let value = getChangedValue(id);
     input[id.id] = value;
+
+    recalculate();
 }
 
 function selectOnchange(id, value) {
@@ -142,6 +144,8 @@ function selectOnchange(id, value) {
         input[id].depth = (id === 'selectBaseBrickSize') ? Number(data[0]) : Number(data[1]);
         input[id].height = Number(data[2])
     }
+
+    recalculate();
 }
 
 // ***
@@ -160,6 +164,8 @@ function changeWallType(type) {
         case 'all' : wallTypeButtonsArr.forEach(button => button.className = ''); useWallTypeAll(); break;
         default : console.log('unknown wall type');
     }
+
+    recalculate();
 }
 function useWallTypeFacade() {
     wallTypeButtonsArr[0].className = 'selected';
@@ -207,6 +213,8 @@ function radioBaseOnchange(id) {
     if(id.id === 'radioBaseBrick') baseBrickDiv.style.display = 'block';
     if(id.id === 'radioBaseBlockCeramic') baseBlockCeramicDiv.style.display = 'block';
     if(id.id === 'radioBaseBlockSilicate') baseBlockSilicateDiv.style.display = 'block';
+
+    recalculate();
 }
 
 // ***
@@ -222,7 +230,8 @@ function addedInputOnchange(id, key, name, type) {
     let value = getChangedValue(id);
     let element = input[name].find(element => element.key === key);
     element[type] = value;
-    console.log(input);
+    
+    recalculate();
 }
 
 function addHole() {
@@ -238,10 +247,14 @@ function addHole() {
     holesDataDiv.insertBefore(hole, addHoleButton);
 
     input.holes.push(new Hole(1.2, 1.6, 1));
+
+    recalculate();
 }
 function deleteHole(id, key) {
     id.parentNode.remove();
     input.holes = input.holes.filter(hole => hole.key !== key);
+
+    recalculate();
 }
 
 function showGarretPopupSell() {
@@ -281,8 +294,18 @@ function addGarretType(type) {
     let h2 = (type == 3) ? 1.8 : 0;
     let w2 = (type == 3) ? 1.6 : 0;
     input.garrets.push(new Garret(1.2, 0.8, h2, w2, 2));
+
+    recalculate();
 }
 function deleteGarret(id, key) {
     id.parentNode.parentNode.remove();
     input.garrets = input.garrets.filter(garret => garret.key !== key);
+
+    recalculate();
+}
+
+// *** COUNT *** //
+function recalculate() {
+    console.log(input);
+    console.log('---');
 }
