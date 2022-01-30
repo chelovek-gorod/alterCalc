@@ -38,21 +38,25 @@ const input = {
     },
     inputBaseBlockSilicateSeam : 0,
 
+    holeKeys : 1,
     holes : [
         {
-            width : 1.6,
-            height : 2.2,
+            key : 'hole-0',
+            width : 1.2,
+            height : 1.6,
             pcs : 1
         }
     ],
 
+    garretKeys : 1,
     garrets : [
         {
-            L1 : 1.6,
-            L2 : 1.6,
-            h1 : 2.2,
-            h2 : 2.2,
-            pcs : 1
+            key : 'garret-0',
+            h1 : 1.2,
+            h2 : 1.8,
+            w1 : 0.8,
+            w2 : 1.6,
+            pcs : 2
         }
     ]
 
@@ -60,6 +64,7 @@ const input = {
 
 class Hole {
     constructor(width, height, pcs) {
+        this.key = 'hole-' + input.holeKeys++;
         this.width = width;
         this.height = height;
         this.pcs = pcs;
@@ -67,10 +72,12 @@ class Hole {
 }
 
 class Garret {
-    constructor(L, h, hc, pcs) {
-        this.L = L;
-        this.h = h;
-        this.hc = hc;
+    constructor(h1, w1, h2, w2, pcs) {
+        this.key = 'garret-' + input.garretKeys++;
+        this.h1 = h1;
+        this.h2 = h2;
+        this.w1 = w1;
+        this.w2 = w2;
         this.pcs = pcs;
     }
 }
@@ -84,6 +91,23 @@ const endSides = 4; // use in bricks in line P pcs count: bricksInLineP = (P - b
 const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P - brickWidth * k_Pinner) / blockLength
 let externalPerimeter;
 let innerPerimeter; // 
+
+// ***
+
+function getChangedValue(id) {
+    let value = Number(id.value.replace(',', '.'));
+    let min = Number(id.min);
+    let max = Number(id.max);
+    let stepSigns = (id.step.indexOf('.') === -1) ? 0 : id.step.length - (id.step.indexOf('.') + 1);
+    let step = Number(id.step);
+    
+    if (value > max) value = max;
+    else if (value < min) value = min;
+    else value = step * Math.round(value / step);
+
+    id.value = value.toFixed(stepSigns);
+    return value;
+}
 
 // ***
 
@@ -106,18 +130,8 @@ function hideVisualImage() {
 }
 
 function inputNumberOnchange(id) {
-    let value = Number(id.value.replace(',', '.'));
-    let min = Number(id.min);
-    let max = Number(id.max);
-    let stepSigns = (id.step.indexOf('.') === -1) ? 0 : id.step.length - (id.step.indexOf('.') + 1);
-    let step = Number(id.step);
-    
-    if (value > max) value = max;
-    else if (value < min) value = min;
-    else value = step * Math.round(value / step);
-    
+    let value = getChangedValue(id);
     input[id.id] = value;
-    id.value = value.toFixed(stepSigns);
 }
 
 function selectOnchange(id, value) {
@@ -193,4 +207,82 @@ function radioBaseOnchange(id) {
     if(id.id === 'radioBaseBrick') baseBrickDiv.style.display = 'block';
     if(id.id === 'radioBaseBlockCeramic') baseBlockCeramicDiv.style.display = 'block';
     if(id.id === 'radioBaseBlockSilicate') baseBlockSilicateDiv.style.display = 'block';
+}
+
+// ***
+
+const holesDataDiv = document.getElementById('holesDataDiv');
+const addHoleButton = document.getElementById('addHoleButton');
+
+const addGarretPopupSell = document.getElementById('addGarretPopupSell');
+const garretsDataDiv = document.getElementById('garretsDataDiv');
+const addGarretButton = document.getElementById('addGarretButton');
+
+function addedInputOnchange(id, key, name, type) {
+    let value = getChangedValue(id);
+    let element = input[name].find(element => element.key === key);
+    element[type] = value;
+    console.log(input);
+}
+
+function addHole() {
+    let hole = document.createElement('div');
+    hole.className = 'hole';
+    hole.setAttribute('key', 'hole-' + input.holeKeys);
+    hole.innerHTML = `<label>Размеры:</label>
+        <input type="number" class="hole-w" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'width')"> x
+        <input type="number" class="hole-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'height')"> м; 
+        <label>количество: <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'pcs')"> шт. </label>
+        <button class="delete-div" onclick="deleteHole(this, 'hole-${input.holeKeys}')">Удалить</button>`;
+    
+    holesDataDiv.insertBefore(hole, addHoleButton);
+
+    input.holes.push(new Hole(1.2, 1.6, 1));
+}
+function deleteHole(id, key) {
+    id.parentNode.remove();
+    input.holes = input.holes.filter(hole => hole.key !== key);
+}
+
+function showGarretPopupSell() {
+    addGarretPopupSell.style.display = 'flex'
+}
+function hideGarretPopupSell() {
+    addGarretPopupSell.style.display = 'none'
+}
+function addGarretType(type) {
+    let garret = document.createElement('div');
+    garret.className = 'garret';
+    garret.setAttribute('key', 'garret-' + input.garretKeys);
+
+    let garretImageDiv = document.createElement('div');
+    garretImageDiv.innerHTML = `<img src="garret_type_${type}.png" alt="Тип мансарды">`;
+    let garretInputsDiv = document.createElement('div');
+    garretInputsDiv.className = 'garret-inputs';
+
+    garretInputsDiv.innerHTML = `<label>h1 = 
+        <input type="number" class="garret-h" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h1')"> м; </label>`;
+    if (type == 3) {
+        garretInputsDiv.innerHTML += `<label>h2 = 
+            <input type="number" class="garret-h" value="1.800" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h2')"> м; </label>`;
+    }
+    garretInputsDiv.innerHTML += `<label>L1 =
+        <input type="number" class="garret-w" value="0.800" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w1')"> м; </label>`;
+    if (type == 3) {
+        garretInputsDiv.innerHTML += `<label>L2 = 
+            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w2')"> м; </label>`;
+    }
+    garretInputsDiv.innerHTML += `<label>количество:
+        <input type="number" class="hole-pcs" value="2" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'pcs')"> шт. </label>
+        <button class="delete-div" onclick="deleteGarret(this, 'garret-${input.garretKeys}')">Удалить</button>`;
+    garret.append(garretImageDiv, garretInputsDiv);
+    garretsDataDiv.insertBefore(garret, addGarretButton);
+
+    let h2 = (type == 3) ? 1.8 : 0;
+    let w2 = (type == 3) ? 1.6 : 0;
+    input.garrets.push(new Garret(1.2, 0.8, h2, w2, 2));
+}
+function deleteGarret(id, key) {
+    id.parentNode.parentNode.remove();
+    input.garrets = input.garrets.filter(garret => garret.key !== key);
 }

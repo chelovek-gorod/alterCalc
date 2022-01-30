@@ -127,103 +127,61 @@
             <div id="holesDataDiv" onmouseover="changeVisualImageTo('house_x.png')" onmouseleave="hideVisualImage()">
                 <div class="title-calc-div">Оконные и дверные проёмы</div>
                 <!---->
-                <div class="hole">
+                <div class="hole" key="hole-0">
                     <label>Размеры:</label>
-                    <input type="number" class="hole-w" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> x
-                    <input type="number" class="hole-h" value="2.200" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
+                    <input type="number" class="hole-w" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-0', 'holes', 'width')"> x
+                    <input type="number" class="hole-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-0', 'holes', 'height')"> м; 
 
                     <label>количество:
-                        <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="inputNumberOnchange(this)"> шт.
+                        <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'hole-0', 'holes', 'pcs')"> шт.
                     </label>
-                    <button class="delete-div">Удалить</button>
+                    <button class="delete-div" onclick="deleteHole(this, 'hole-0')">Удалить</button>
                 </div>
                 <!---->
-                <div class="hole">
-                    <label>Размеры:</label>
-                    <input type="number" class="hole-w" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> x
-                    <input type="number" class="hole-h" value="2.200" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
-
-                    <label>количество:
-                        <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="inputNumberOnchange(this)"> шт.
-                    </label>
-                    <button class="delete-div">Удалить</button>
-                </div>
-                <!---->
-                <button class="add-div">Добавить проём</button>
+                <button id="addHoleButton" class="add-div" onclick="addHole()">Добавить проём</button>
             </div>
-            <div id="garretDataDiv" onmouseover="changeVisualImageTo('house_r.png')" onmouseleave="hideVisualImage()">
+            <div id="garretsDataDiv" onmouseover="changeVisualImageTo('house_r.png')" onmouseleave="hideVisualImage()">
                 <div class="title-calc-div">Мансарда</div>
                 <!---->
-                <div class="garret">
+                <div class="garret" key="garret-0">
                     <div>
                         <img src="garret_type_3.png" alt="Тип мансарды">
                     </div>
                     <div class="garret-inputs">
                         <label>h1 =
-                            <input type="number" class="garret-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
+                            <input type="number" class="garret-h" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-0', 'garrets', 'h1')"> м; 
                         </label>
                         <label>h2 =
-                            <input type="number" class="garret-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
+                            <input type="number" class="garret-h" value="1.800" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-0', 'garrets', 'h2')"> м; 
                         </label>
                         <label>L1 =
-                            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="inputNumberOnchange(this)"> м; 
+                            <input type="number" class="garret-w" value="0.800" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-0', 'garrets', 'w1')"> м; 
                         </label>
                         <label>L2 =
-                            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="inputNumberOnchange(this)"> м; 
+                            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-0', 'garrets', 'w2')"> м; 
                         </label>
     
                         <label>количество:
-                            <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="inputNumberOnchange(this)"> шт.
+                            <input type="number" class="hole-pcs" value="2" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'garret-0', 'garrets', 'pcs')"> шт.
                         </label>
-                        <button class="delete-div">Удалить</button>
+                        <button class="delete-div" onclick="deleteGarret(this, 'garret-0')">Удалить</button>
                     </div>
                 </div>
                 <!---->
-                <div class="garret">
-                    <div>
-                        <img src="garret_type_2.png" alt="Тип мансарды">
-                    </div>
-                    <div class="garret-inputs">
-                        <br class="garret-br">
-                        <label>h =
-                            <input type="number" class="garret-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
-                        </label>
-                        <label>L =
-                            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="inputNumberOnchange(this)"> м; 
-                        </label>
-    
-                        <label>количество:
-                            <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="inputNumberOnchange(this)"> шт.
-                        </label>
-                        <button class="delete-div">Удалить</button>
-                    </div>
-                </div>
-                <!---->
-                <div class="garret">
-                    <div>
-                        <img src="garret_type_1.png" alt="Тип мансарды">
-                    </div>
-                    <div class="garret-inputs">
-                        <br class="garret-br">
-                        <label>h =
-                            <input type="number" class="garret-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="inputNumberOnchange(this)"> м; 
-                        </label>
-                        <label>L =
-                            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="inputNumberOnchange(this)"> м; 
-                        </label>
-    
-                        <label>количество:
-                            <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="inputNumberOnchange(this)"> шт.
-                        </label>
-                        <button class="delete-div">Удалить</button>
-                    </div>
-                </div>
-                <!---->
-                <button class="add-div">Добавить мансарду</button>
+                <button id="addGarretButton" class="add-div" onclick="showGarretPopupSell()">Добавить мансарду</button>
             </div>
             <div id="resultDataDiv">
                 <div class="title-calc-div">Результаты расчетов</div>
                 <span style="color: #e31e25;">Скоро все заработает</span>
+            </div>
+        </div>
+
+        <div id="addGarretPopupSell" onclick="hideGarretPopupSell()">
+            <div class="garret-popup">
+                <div class="garret-popup-title">Выберите форму мансарды</div>
+                <img src="garret_type_1.png" alt="Тип мансарды 1" onclick="addGarretType(1)">
+                <img src="garret_type_2.png" alt="Тип мансарды 2" onclick="addGarretType(2)">
+                <img src="garret_type_3.png" alt="Тип мансарды 3" onclick="addGarretType(3)">
             </div>
         </div>
 
