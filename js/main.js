@@ -258,10 +258,12 @@ function deleteHole(id, key) {
 }
 
 function showGarretPopupSell() {
-    addGarretPopupSell.style.display = 'flex'
+    addGarretPopupSell.style.display = 'flex';
+    setTimeout(changeVisualImageTo, 300, 'house_r.png');
 }
 function hideGarretPopupSell() {
-    addGarretPopupSell.style.display = 'none'
+    addGarretPopupSell.style.display = 'none';
+    hideVisualImage();
 }
 function addGarretType(type) {
     let garret = document.createElement('div');
@@ -305,6 +307,7 @@ function deleteGarret(id, key) {
 }
 
 // *** COUNT *** //
+
 function recalculate() {
     console.log(input);
     console.log('---');
