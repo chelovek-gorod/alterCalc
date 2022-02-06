@@ -9,13 +9,14 @@ const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P
 let getErrorIs = false;
 
 /* MORTARS */
-const facadeMortar = 600; // 600 kg for 1 m3 just seams
-const baseMortar = 600; // 600 kg for 1 m3 just seams
-const baseGlue = 600; // 600 kg for 1 m3 just seams
+const facadeMortar = 2307.692308; // 600 kg for 1 m3 just seams
+const baseMortar = 528; // 600 kg for 1 m3 just seams
+const baseGlue = 1914; // 600 kg for 1 m3 just seams
 
 let facadeMortarWeight = 0; // kg
 let baseMortarWeight = 0; // kg
 let baseGlueWeight = 0; // kg
+
 
 const input = {
     facadeIs : true,
@@ -24,8 +25,8 @@ const input = {
     radioBaseBlockCeramic : false,
     radioBaseBlockSilicate : false,
 
-    inputPerimeterSize : 16,
-    inputHeightSize : 2.7,
+    inputPerimeterSize : 36,
+    inputHeightSize : 6,
 
     selectFacadeBrickSize : {
         width : 250,
@@ -333,6 +334,7 @@ function recalculate() {
         holeKeys, holes, garretKeys, garrets] = input;
     */
     resultErrors.innerHTML = '';
+    resultData.innerHTML = '';
     getErrorIs = false;
 
     facadeMortarWeight = 0;
@@ -406,27 +408,31 @@ function recalculate() {
     console.groupEnd();
 
     /* update result */
-    resultData.innerHTML = '';
-    resultData.innerHTML += `<b>Вам потребуется:</b><br><br>`;
+    resultData.innerHTML += `<b>Вам потребуется:</b><br>`;
     if (input.facadeIs === true) {
         resultData.innerHTML +=
-        `Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} : <b>${facadeBrickNumbers}шт</b><br>`;
+        `<br>Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} : <b>${facadeBrickNumbers} шт.</b><br>
+        <b>${facadeMortarWeight} кг</b> цветной кладочной смеси для фасадного кирпича.<br>`;
 
     }
     if (input.baseIs === true) {
         if (input.radioBaseBrick === true) {
             resultData.innerHTML +=
-            `Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} : <b>${baseElementNumbers}шт</b><br>`;
+            `<br>Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            <b>${baseMortarWeight} кг</b> теплоизоляционной кладочной смеси.<br>`;
         }
         if (input.radioBaseBlockCeramic === true) {
             resultData.innerHTML +=
-            `Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} : <b>${baseElementNumbers}шт</b><br>`;
+            `<br>Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            <b>${baseMortarWeight} кг</b> теплоизоляционной кладочной смеси.<br>`;
         }
-        if (input.radioBaseBlockCeramic === true) {
+        if (input.radioBaseBlockSilicate === true) {
             resultData.innerHTML +=
-            `Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} : <b>${baseElementNumbers}шт</b><br>`;
+            `<br>Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            <b>${baseGlueWeight} кг</b> клея для газосиликатных блоков.<br>`;
         }
     }
+    if (input.facadeIs === true && input.baseIs === true) resultData.innerHTML += `<br>Объем теплового зазора: <b>${gapVolume} м<sup>3</sup><b>.<br>`;
 }
 
 function countFacadeBrickNumbers(garretsSquare, holesSquare) {
@@ -452,10 +458,15 @@ function countFacadeBrickNumbers(garretsSquare, holesSquare) {
     }
 
     /* MORTARS */
-    let facadeMortarVolumePerBrick = (((input.selectFacadeBrickSize.width + input.inputFacadeBrickSeam) * input.selectFacadeBrickSize.depth) / (1000**2 /* mm2 -> m2 */)
-        + (input.selectFacadeBrickSize.height * input.selectFacadeBrickSize.depth) / (1000**2 /* mm2 -> m2 */)) * (input.inputFacadeBrickSeam / 1000);
+    let brickSizeMeter = {
+        width : input.selectFacadeBrickSize.width / 1000,
+        depth : input.selectFacadeBrickSize.depth / 1000,
+        height : input.selectFacadeBrickSize.height / 1000,
+        seam : input.inputFacadeBrickSeam / 1000
+    }; console.log('---',brickSizeMeter);
+    let facadeMortarVolumePerBrick = (brickSizeMeter.width + brickSizeMeter.seam + brickSizeMeter.height) * brickSizeMeter.depth * brickSizeMeter.seam;
     console.log('facadeMortarVolumePerBrick =', facadeMortarVolumePerBrick);
-    facadeMortarWeight = Math.round(facadeBrickNumbers * facadeMortarVolumePerBrick * facadeMortar);
+    facadeMortarWeight = Math.ceil(facadeBrickNumbers * facadeMortarVolumePerBrick * facadeMortar);
 
     return facadeBrickNumbers;
 }
@@ -531,12 +542,24 @@ function countBaseElementNumbers(garretsSquare, holesSquare) {
     console.log('elementsInHoles =', elementsInHoles);
     let baseElementNumbers = Math.round(elementsInLineP * elementsLinesInHeight + elementsInGarrets) - Math.floor(elementsInHoles);
 
+    /*
     if(baseElementNumbers < 0) {
         alert('Площадь проемов превышает внутренюю площадь строения!');
         resultErrors.innerHTML += 'Площадь проемов превышает внутренюю площадь строения!<br>';
         resultData.innerHTML = '';
         getErrorIs = true;
         return 0;
+    }
+    */
+    if (baseElementNumbers < 0) {
+        if (input.facadeIs === true) baseElementNumbers = 0;
+        else {
+            alert('Площадь проемов превышает площадь строения!');
+            resultErrors.innerHTML += 'Площадь проемов превышает площадь строения!<br>';
+            resultData.innerHTML = '';
+            getErrorIs = true;
+            return 0;
+        }
     }
 
     /* MORTARS */
