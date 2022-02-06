@@ -406,28 +406,25 @@ function recalculate() {
     console.groupEnd();
 
     /* update result */
+    resultData.innerHTML = '';
     resultData.innerHTML += `<b>Вам потребуется:</b><br><br>`;
     if (input.facadeIs === true) {
         resultData.innerHTML +=
-        `Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} : <b>${facadeBrickNumbers}шт</b><br>
-        <b>${facadeMortarWeight}кг</b> цветной кладочной смеси для фасадного кирпича.<br><br>`;
+        `Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} : <b>${facadeBrickNumbers}шт</b><br>`;
 
     }
     if (input.baseIs === true) {
         if (input.radioBaseBrick === true) {
             resultData.innerHTML +=
-            `Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} : <b>${baseElementNumbers}шт</b><br>
-            <b>${baseMortarWeight}кг</b> теплоизоляционной кладочной смеси.<br>`;
+            `Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} : <b>${baseElementNumbers}шт</b><br>`;
         }
         if (input.radioBaseBlockCeramic === true) {
             resultData.innerHTML +=
-            `Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} : <b>${baseElementNumbers}шт</b><br>
-            <b>${baseMortarWeight}кг</b> теплоизоляционной кладочной смеси.<br>`;
+            `Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} : <b>${baseElementNumbers}шт</b><br>`;
         }
         if (input.radioBaseBlockCeramic === true) {
             resultData.innerHTML +=
-            `Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} : <b>${baseElementNumbers}шт</b><br>
-            <b>${baseGlueWeight}кг</b> клея для газосиликатных блоков.<br>`;
+            `Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} : <b>${baseElementNumbers}шт</b><br>`;
         }
     }
 }
