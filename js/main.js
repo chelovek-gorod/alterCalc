@@ -33,7 +33,7 @@ const input = {
         depth : 120,
         height : 65
     },
-    inputFacadeBrickSeam : 5,
+    inputFacadeBrickSeam : 10,
 
     inputGapSize : 50,
 
@@ -43,7 +43,7 @@ const input = {
         height : 65
     },
     selectBaseBrickWallSize : 1,
-    inputBaseBrickSeam : 5,
+    inputBaseBrickSeam : 10,
 
     selectBaseBlockCeramicSize : {
         width : 250,
@@ -57,7 +57,7 @@ const input = {
         depth : 400,
         height : 250
     },
-    inputBaseBlockSilicateSeam : 0,
+    inputBaseBlockSilicateSeam : 3,
 
     holeKeys : 1,
     holes : [],
