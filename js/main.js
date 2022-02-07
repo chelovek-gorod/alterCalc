@@ -9,7 +9,7 @@ const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P
 let getErrorIs = false;
 
 /* MORTARS */
-const facadeMortar = 2564; // 600 kg for 1 m3 just seams
+const facadeMortar = 2564.1; // 600 kg for 1 m3 just seams
 const baseMortar = 528; // 600 kg for 1 m3 just seams
 const baseGlue = 1914; // 600 kg for 1 m3 just seams
 
