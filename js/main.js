@@ -436,7 +436,7 @@ function recalculate() {
             <b>${baseGlueWeight} кг</b> клея для газосиликатных блоков.<br>`;
         }
     }
-    if (input.facadeIs === true && input.baseIs === true) resultData.innerHTML += `<br>Объем теплового зазора: <b>${gapVolume.toFixed(3)} м<sup>3</sup><b>.<br>`;
+    if (input.facadeIs === true && input.baseIs === true) resultData.innerHTML += `<br>Объем теплового зазора: <b>${(gapVolume > 0) ? gapVolume.toFixed(3) : 0} м<sup>3</sup><b>.<br>`;
 }
 
 function countFacadeBrickNumbers(garretsSquare, holesSquare) {
