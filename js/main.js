@@ -454,8 +454,8 @@ function countFacadeBrickNumbers(garretsSquare, holesSquare) {
     let facadeBrickNumbers = Math.round(bricksInLineP * bricksLinesInHeight + bricksInGarrets) - Math.floor(bricksInHoles);
 
     if(facadeBrickNumbers < 0) {
-        alert('Площадь проемов превышает внутренюю площадь фасада!');
-        resultErrors.innerHTML += 'Площадь проемов превышает внутренюю площадь фасада!<br>';
+        alert('Площадь проемов превышает внутренюю площадь строения!');
+        resultErrors.innerHTML += 'Площадь проемов превышает внутренюю площадь строения!<br>';
         resultData.innerHTML = '';
         getErrorIs = true;
         return 0;
