@@ -9,10 +9,10 @@ const k_Pinner = 8; // use in blocks in line Pin pcs count: blocksInLinePin = (P
 let getErrorIs = false;
 
 /* MORTARS */
-const facadeMortar = 2564.1; // 600 kg for 1 m3 just seams
-const baseBrickMortar = 1250; // 600 kg for 1 m3 just seams
-const baseBlockMortar = 528; // 600 kg for 1 m3 just seams
-const baseGlue = 1913.776; // 600 kg for 1 m3 just seams
+const facadeMortarKgPer1M3 = 2564.1;
+const baseBrickMortarKgPer1M3 = 1250;
+const baseBlockMortarKgPer1M3 = 695;
+const baseGlueKgPer1M3 = 1913.776;
 
 let facadeMortarWeight = 0; // kg
 let baseBrickMortarWeight = 0; // kg
@@ -436,7 +436,7 @@ function recalculate() {
             <b>${baseGlueWeight} кг</b> клея для газосиликатных блоков.<br>`;
         }
     }
-    if (input.facadeIs === true && input.baseIs === true) resultData.innerHTML += `<br>Объем теплового зазора: <b>${gapVolume} м<sup>3</sup><b>.<br>`;
+    if (input.facadeIs === true && input.baseIs === true) resultData.innerHTML += `<br>Объем теплового зазора: <b>${gapVolume.toFixed(3)} м<sup>3</sup><b>.<br>`;
 }
 
 function countFacadeBrickNumbers(garretsSquare, holesSquare) {
@@ -470,7 +470,7 @@ function countFacadeBrickNumbers(garretsSquare, holesSquare) {
     }; console.log('--brickSizeMeter',brickSizeMeter);
     let facadeMortarVolumePerBrick = (brickSizeMeter.width + brickSizeMeter.seam + brickSizeMeter.height) * brickSizeMeter.depth * brickSizeMeter.seam;
     console.log('facadeMortarVolumePerBrick =', facadeMortarVolumePerBrick);
-    facadeMortarWeight = Math.ceil(facadeBrickNumbers * facadeMortarVolumePerBrick * facadeMortar);
+    facadeMortarWeight = Math.ceil(facadeBrickNumbers * facadeMortarVolumePerBrick * facadeMortarKgPer1M3);
 
     return facadeBrickNumbers;
 }
@@ -573,22 +573,32 @@ function countBaseElementNumbers(garretsSquare, holesSquare) {
             depth : input.selectBaseBrickSize.depth / 1000,
             height : input.selectBaseBrickSize.height / 1000,
             seam : input.inputBaseBrickSeam / 1000
-        }; console.log('--|--baseBrickSizeMeter',baseBrickSizeMeter);
+        }; console.log('--|--baseBrickSizeMeter', baseBrickSizeMeter);
         let baseMortarVolumePerBrick = (baseBrickSizeMeter.width + baseBrickSizeMeter.seam + baseBrickSizeMeter.height) * baseBrickSizeMeter.depth * baseBrickSizeMeter.seam;
         console.log('baseMortarVolumePerBrick =', baseMortarVolumePerBrick);
         let baseMortarVolumePerInnerBrick = (baseInnerBricks === 0) ? 0 : (baseBrickSizeMeter.width + baseBrickSizeMeter.seam) * (baseBrickSizeMeter.height + baseBrickSizeMeter.seam) * baseBrickSizeMeter.seam;
         console.log('baseMortarVolumePerInnerBrick =', baseMortarVolumePerInnerBrick);
-        baseBrickMortarWeight = Math.ceil((baseElementNumbers * baseMortarVolumePerBrick + baseInnerBricks * baseMortarVolumePerInnerBrick) * baseBrickMortar);
+        baseBrickMortarWeight = Math.ceil((baseElementNumbers * baseMortarVolumePerBrick + baseInnerBricks * baseMortarVolumePerInnerBrick) * baseBrickMortarKgPer1M3);
     } else if (input.radioBaseBlockCeramic === true) {
-        let baseMortarVolumePerBlockCeramic = ((input.selectBaseBlockCeramicSize.width * input.selectBaseBlockCeramicSize.depth) / (1000**2 /* mm2 -> m2 */))
-            * (input.inputBaseBlockCeramicSeam / 1000);
+        let baseBlockCeramicSizeMeter = {
+            width : input.selectBaseBlockCeramicSize.width / 1000,
+            depth : input.selectBaseBlockCeramicSize.depth / 1000,
+            seam : input.inputBaseBlockCeramicSeam / 1000
+        }; console.log('--||-baseBlockCeramicSizeMeter', baseBlockCeramicSizeMeter);
+        let baseMortarVolumePerBlockCeramic = baseBlockCeramicSizeMeter.width * baseBlockCeramicSizeMeter.depth * baseBlockCeramicSizeMeter.seam;
         console.log('baseMortarVolumePerBlockCeramic =', baseMortarVolumePerBlockCeramic);
-        baseBlockMortarWeight = Math.round(baseElementNumbers * baseMortarVolumePerBlockCeramic * baseBlockMortar);
+        baseBlockMortarWeight = Math.round(baseElementNumbers * baseMortarVolumePerBlockCeramic * baseBlockMortarKgPer1M3);
     } else if (input.radioBaseBlockSilicate === true) {
-        let baseMortarVolumePerBlockSilicate = (((input.selectBaseBlockSilicateSize.width + input.inputBaseBlockSilicateSeam) * input.selectBaseBrickSize.depth) / (1000**2 /* mm2 -> m2 */)
-            + (input.selectBaseBlockSilicateSize.height * input.selectBaseBlockSilicateSize.depth) / (1000**2 /* mm2 -> m2 */)) * (input.inputBaseBlockSilicateSeam / 1000);
+        let baseBlockSilicateSizeMeter = {
+            width : input.selectBaseBlockSilicateSize.width / 1000,
+            depth : input.selectBaseBlockSilicateSize.depth / 1000,
+            height : input.selectBaseBlockSilicateSize.height / 1000,
+            seam : input.inputBaseBlockSilicateSeam / 1000
+        }; console.log('--|||baseBlockSilicateSizeMeter', baseBlockSilicateSizeMeter);
+        let baseMortarVolumePerBlockSilicate = (baseBlockSilicateSizeMeter.width + baseBlockSilicateSizeMeter.seam + baseBlockSilicateSizeMeter.height)
+            * baseBlockSilicateSizeMeter.depth * input.selectBaseBrickSize.depth;
         console.log('baseMortarVolumePerBlockSilicate =', baseMortarVolumePerBlockSilicate);
-        baseGlueWeight = Math.round(baseElementNumbers * baseMortarVolumePerBlockSilicate * baseGlue);
+        baseGlueWeight = Math.round(baseElementNumbers * baseMortarVolumePerBlockSilicate * baseGlueKgPer1M3);
     } else {
         console.log('unknown inner wall type');
         return 0;
