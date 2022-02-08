@@ -25,12 +25,12 @@
             </div>
             <div id="perimeterDiv">
                 <label for="inputPerimeterSize" onmouseover="changeVisualImageTo('house_p.png')" onmouseleave="hideVisualImage()">Периметр:
-                    <input type="number" id="inputPerimeterSize" value="36.000" min="1" step="0.005" max="10000" onchange="inputNumberOnchange(this)"> м
+                    <input type="number" id="inputPerimeterSize" value="36.000" min="1" step="0.005" max="10000" onchange="inputNumberOnchange(this)" oninput="inputOnInput('периметра');"> м
                 </label>
             </div>
             <div id="heightDiv">
                 <label for="inputHeightSize" onmouseover="changeVisualImageTo('house_h.png')" onmouseleave="hideVisualImage()">Высота:
-                    <input type="number" id="inputHeightSize" value="6" min="0.065" step="0.005" max="100" onchange="inputNumberOnchange(this)"> м
+                    <input type="number" id="inputHeightSize" value="6" min="0.065" step="0.005" max="100" onchange="inputNumberOnchange(this)" oninput="inputOnInput('высоты');"> м
                 </label>
             </div>
             <div id="wallTypeButtonsDiv">
@@ -56,18 +56,18 @@
                             <option value="250 120 88">1,4 НФ (250x120x88 мм)</option>
                             <option value="240 115 71">1NF (240x115x71 мм)</option>
                             <option value="210 100 65">WDF (210x100x65 мм)</option>
-                        </select> ,
+                        </select> ;
                         </nobr>
                     </label>
                     <label for="inputFacadeBrickSeam">шов:
-                        <input type="number" id="inputFacadeBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
+                        <input type="number" id="inputFacadeBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)" oninput="inputOnInput('шва фасадного кирпича');"> мм
                     </label>
                 </div>
                 <div id="baseDiv">
                     <div class="title-calc-div">Внутренняя кладка</div>
                     <div id="baseGap">
                         <label for="inputGapSize" onmouseover="changeVisualImageBaseSize()" onmouseleave="hideVisualImage()">Тепловой зазор между фасадом и стеной:
-                            <nobr><input type="number" id="inputGapSize" value="50" min="0" step="1" max="1000" onchange="inputNumberOnchange(this)"> мм</nobr>
+                            <nobr><input type="number" id="inputGapSize" value="50" min="0" step="1" max="1000" onchange="inputNumberOnchange(this)" oninput="inputOnInput('теплового зазора');"> мм</nobr>
                         </label>
                     </div>
                     <label for="radioBaseBrick" onmouseover="changeVisualImageBaseType('k')" onmouseleave="hideVisualImage()">
@@ -89,7 +89,7 @@
                                 <option selected value="250 120 65">250x120x65</option>
                                 <option value="250 120 88">250x120x88</option>
                                 <option value="250 120 140">250x120x140</option>
-                            </select>  мм, 
+                            </select>  мм; 
                             </nobr>
                         </label>
                         <nobr>
@@ -100,10 +100,10 @@
                                 <option value="1.5">1,5 кирпича</option>
                                 <option value="2">2 кирпича</option>
                             </select>
-                        </label> ,
+                        </label> ;
                         </nobr>
                         <label for="inputBaseBrickSeam">шов:
-                            <input type="number" id="inputBaseBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
+                            <input type="number" id="inputBaseBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)" oninput="inputOnInput('шва рядового кирпича');"> мм
                         </label>
                     </div>
                     <div id="baseBlockCeramicDiv">
@@ -115,11 +115,11 @@
                                 <option value="398 250 219">Блоки 11,2 НФ (398x250x219 мм)</option>
                                 <option value="440 250 219">Блоки 12,4 НФ (440x250x219 мм)</option>
                                 <option value="510 250 219">Блоки 14,3 НФ (510x250x219 мм)</option>
-                            </select> ,
+                            </select> ;
                             </nobr>
                         </label>
                         <label for="inputBaseBlockCeramicSeam">шов:
-                            <input type="number" id="inputBaseBlockCeramicSeam" value="17" min="10" step="1" max="50" onchange="inputNumberOnchange(this)"> мм
+                            <input type="number" id="inputBaseBlockCeramicSeam" value="17" min="10" step="1" max="50" onchange="inputNumberOnchange(this)" oninput="inputOnInput('шва керамического блока');"> мм
                         </label>
                     </div>
                     <div id="baseBlockSilicateDiv">
@@ -131,11 +131,11 @@
                                 <option value="625 375 250">625x375x250 мм</option>
                                 <option selected value="625 400 250">625x400x250 мм</option>
                                 <option value="625 500 250">625x500x250 мм</option>
-                            </select> ,
+                            </select> ;
                             </nobr>
                         </label>
                         <label for="inputBaseBlockSilicateSeam">шов:
-                            <input type="number" id="inputBaseBlockSilicateSeam" value="3" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
+                            <input type="number" id="inputBaseBlockSilicateSeam" value="3" min="2" step="1" max="15" onchange="inputNumberOnchange(this)" oninput="inputOnInput('шва газосиликатного блока');"> мм
                         </label>
                     </div>
                 </div>

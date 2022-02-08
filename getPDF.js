@@ -15,32 +15,32 @@ const docDefinition = {
 	content: [
 		
 		{
-			image: 'imgRedLine', width: 180, height: 3
-		},
-
-		{
 			//style: 'tableExample',
 			//color: '#444',
 			border: [false, false, false, false],
 			table: {
-				widths: [192, 24, 120, 24, 120],
+				widths: [148, 12, 160, 12, 148],
 				body: [
 					[
 						{ rowSpan: 2, image: 'imgLogo', width: 128, height: 48, border: [false, false, false, false] },
-						{ width: 24, image: 'imgMap', border: [false, false, false, false] },
+						{ width: 12, image: 'imgMap', border: [false, false, false, false] },
 						{ text: address, style: 'headText', border: [false, false, false, false] },
-						{ width: 24, image: 'imgPhone', border: [false, false, false, false] },
+						{ width: 12, image: 'imgPhone', border: [false, false, false, false] },
 						{ text: phone1, style: 'headText', border: [false, false, false, false] }
 					],
 					[
 						{},
-						{ width: 24, image: 'imgTime', border: [false, false, false, false] },
+						{ width: 12, image: 'imgTime', border: [false, false, false, false] },
 						{ text: workTime, style: 'headText', border: [false, false, false, false] },
-						{ width: 24, image: 'imgPhone', border: [false, false, false, false] },
+						{ width: 12, image: 'imgPhone', border: [false, false, false, false] },
 						{ text: phone2, style: 'headText', border: [false, false, false, false] }
 					]
 				]
 			}
+		},
+
+		{
+			image: 'imgRedLine', width: 480, height: 2
 		},
 
 		'If you specify width, image will scale proportionally',
@@ -163,4 +163,16 @@ const docDefinition = {
 	
 }
 
-function getPDF() { pdfMake.createPdf(docDefinition).download('AlterKirpich-' + new Date().format('d-m-Y(h:i:s)')); }
+function getPDF() {
+	let newDate = new Date();
+	let day = newDate.getDate(),
+		month = newDate.getMonth() + 1,
+		year = newDate.getFullYear(),
+		hours = newDate.getHours(),
+		minutes = (+newDate.getMinutes() + 1 < 10) ? ( "0" + (newDate.getMinutes() + 1)) : newDate.getMinutes() + 1,
+		seconds = (+newDate.getSeconds() < 10) ? ("0" + newDate.getSeconds()) : newDate.getSeconds();
+
+	let fileName = 'AlterKirpich-' + year + "-" + month + "-" + day + "(" + hours + ":" + minutes + ":" + seconds + ")"; // 2010-04-07(17:00:12)
+
+	pdfMake.createPdf(docDefinition).download(fileName);
+}

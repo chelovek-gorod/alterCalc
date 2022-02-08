@@ -121,6 +121,13 @@ function getChangedValue(id) {
 
 // ***
 
+function inputOnInput(type) {
+    resultErrors.innerHTML = 'Ждем изменений ' + type + '...';
+    resultData.innerHTML = '';
+}
+
+// ***
+
 function changeVisualImageBase(type) {
     if (type === 'f') changeVisualImageTo('house_wall_type_f.png');
     else {
@@ -258,9 +265,9 @@ function addHole() {
     hole.className = 'hole';
     hole.setAttribute('key', 'hole-' + input.holeKeys);
     hole.innerHTML = `<label>Размеры:</label>
-        <nobr><input type="number" class="hole-w" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'width')"> x
-        <input type="number" class="hole-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'height')"> м; </nobr>
-        <label>количество: <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'pcs')"> шт. </label>
+        <nobr><input type="number" class="hole-w" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'width')" oninput="inputOnInput('размеров проёма');"> x
+        <input type="number" class="hole-h" value="1.600" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'height')" oninput="inputOnInput('размеров проёма');"> м; </nobr>
+        <label>количество: <input type="number" class="hole-pcs" value="1" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'hole-${input.holeKeys}', 'holes', 'pcs')" oninput="inputOnInput('числа проёмов');"> шт. </label>
         <button class="delete-div" onclick="deleteHole(this, 'hole-${input.holeKeys}')">Удалить</button>`;
     
     holesDataDiv.insertBefore(hole, addHoleButton);
@@ -296,21 +303,21 @@ function addGarretType(type) {
     garretInputsDiv.className = 'garret-inputs';
 
     garretInputsDiv.innerHTML = `<label>h${(type == 3)?'<sub>1</sub>':''} = 
-        <input type="number" class="garret-h" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h1')"> м; 
+        <input type="number" class="garret-h" value="1.200" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h1')" oninput="inputOnInput('высоты мансарды');"> м; 
         </label>
         <label>L${(type == 3)?'<sub>1</sub>':''} =
-        <input type="number" class="garret-w" value="0.800" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w1')"> м; 
+        <input type="number" class="garret-w" value="0.800" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w1')" oninput="inputOnInput('длины мансарды');"> м; 
         </label>`;
     if (type == 3) {
         garretInputsDiv.innerHTML += `<label>h<sub>2</sub> = 
-            <input type="number" class="garret-h" value="1.800" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h2')"> м; 
+            <input type="number" class="garret-h" value="1.800" min="0.010" step="0.001" max="20.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'h2')" oninput="inputOnInput('высоты мансарды');"> м; 
             </label>
             <label>L<sub>2</sub> = 
-            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w2')"> м; 
+            <input type="number" class="garret-w" value="1.600" min="0.010" step="0.001" max="50.000" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'w2')" oninput="inputOnInput('длины мансарды');"> м; 
             </label>`;
     }
     garretInputsDiv.innerHTML += `<label>количество:
-        <input type="number" class="hole-pcs" value="2" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'pcs')"> шт. 
+        <input type="number" class="hole-pcs" value="2" min="1" step="1" max="999" onchange="addedInputOnchange(this, 'garret-${input.garretKeys}', 'garrets', 'pcs')" oninput="inputOnInput('числа мансард');"> шт. 
         </label>
         <button class="delete-div" onclick="deleteGarret(this, 'garret-${input.garretKeys}')">Удалить</button>`;
     garret.append(garretImageDiv, garretInputsDiv);
@@ -441,24 +448,24 @@ function recalculate() {
     resultData.innerHTML += `<b>Вам потребуется:</b><br>`;
     if (input.facadeIs === true) {
         resultData.innerHTML +=
-        `<br>Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} : <b>${facadeBrickNumbers} шт.</b><br>
+        `<br>Фасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} мм: <b>${facadeBrickNumbers} шт.</b><br>
         <b>${facadeMortarWeight} кг</b> цветной кладочной смеси для фасадного кирпича.<br>`;
 
     }
     if (input.baseIs === true) {
         if (input.radioBaseBrick === true) {
             resultData.innerHTML +=
-            `<br>Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            `<br>Рядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} мм: <b>${baseElementNumbers} шт.</b><br>
             <b>${baseBrickMortarWeight} кг</b> теплоизоляционной кладочной смеси.<br>`;
         }
         if (input.radioBaseBlockCeramic === true) {
             resultData.innerHTML +=
-            `<br>Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            `<br>Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} мм: <b>${baseElementNumbers} шт.</b><br>
             <b>${baseBlockMortarWeight} кг</b> теплоизоляционной кладочной смеси.<br>`;
         }
         if (input.radioBaseBlockSilicate === true) {
             resultData.innerHTML +=
-            `<br>Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} : <b>${baseElementNumbers} шт.</b><br>
+            `<br>Газосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} мм: <b>${baseElementNumbers} шт.</b><br>
             <b>${baseGlueWeight} кг</b> клея для газосиликатных блоков.<br>`;
         }
     }
