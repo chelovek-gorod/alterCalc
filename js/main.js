@@ -607,10 +607,6 @@ function countBaseElementNumbers(garretsSquare, holesSquare) {
             height : input.selectBaseBlockSilicateSize.height / 1000,
             seam : input.inputBaseBlockSilicateSeam / 1000
         }; console.log('--|||baseBlockSilicateSizeMeter', baseBlockSilicateSizeMeter);
-        console.log(baseBlockSilicateSizeMeter.width + baseBlockSilicateSizeMeter.seam + baseBlockSilicateSizeMeter.height);
-        console.log(baseBlockSilicateSizeMeter.depth * input.selectBaseBrickSize.seam);
-
-
         let baseMortarVolumePerBlockSilicate = (baseBlockSilicateSizeMeter.width + baseBlockSilicateSizeMeter.seam + baseBlockSilicateSizeMeter.height)
             * baseBlockSilicateSizeMeter.depth * baseBlockSilicateSizeMeter.seam;
         console.log('baseMortarVolumePerBlockSilicate =', baseMortarVolumePerBlockSilicate);
