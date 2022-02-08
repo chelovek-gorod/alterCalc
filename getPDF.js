@@ -3,10 +3,13 @@
 // https://ezgif.com/image-to-datauri //
 // http://pdfmake.org/playground.html //
 
-const address = 'г. Минск, огойский тракт, 50, БЦ "Аквабел", каб. 342';
+const address = 'г. Минск, Логойский тракт, 50, БЦ "Аквабел", каб. 342';
 const workTime = 'Пн. - Пт.: с 9:00 до 18:00';
-const phone1 = '+375 (29) 652-57-70';
-const phone2 = '+375 (33) 690-10-40';
+const phone1 = '+375 (33) 690-10-40';
+const phone2 = '+375 (29) 652-57-70';
+
+console.log(input);
+console.log(output);
 
 const docDefinition = {
 	content: [
@@ -160,4 +163,4 @@ const docDefinition = {
 	
 }
 
-function getPDF() { pdfMake.createPdf(docDefinition).download(); }
+function getPDF() { pdfMake.createPdf(docDefinition).download('AlterKirpich-' + new Date().format('d-m-Y(h:i:s)')); }

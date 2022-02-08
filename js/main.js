@@ -69,6 +69,16 @@ const input = {
 
 }
 
+const output = {
+    facadeBrickNumbers : 0,
+    facadeMortarWeight : 0,
+    baseElementNumbers : 0,
+    baseBrickMortarWeight : 0,
+    baseBlockMortarWeight : 0,
+    baseGlueWeight : 0,
+    gapVolume : 0
+}
+
 class Hole {
     constructor(width, height, pcs) {
         this.key = 'hole-' + input.holeKeys++;
@@ -343,6 +353,14 @@ function recalculate() {
     baseBrickMortarWeight = 0; // kg
     baseBlockMortarWeight = 0; // kg
     baseGlueWeight = 0; // kg
+
+    output.facadeBrickNumbers = 0;
+    output.facadeMortarWeight = 0;
+    output.baseElementNumbers = 0;
+    output.baseBrickMortarWeight = 0;
+    output.baseBlockMortarWeight = 0;
+    output.baseGlueWeight = 0;
+    output.gapVolume = 0;
     
     // {width, depth, height}
 
@@ -410,6 +428,14 @@ function recalculate() {
     console.log('baseBlockMortarWeight =', baseBlockMortarWeight);
     console.log('baseGlueWeight =', baseGlueWeight); // m3
     console.groupEnd();
+
+    output.facadeBrickNumbers = (facadeBrickNumbers > 0) ? facadeBrickNumbers : 0;
+    output.facadeMortarWeight = (facadeMortarWeight > 0) ? facadeMortarWeight : 0;
+    output.baseElementNumbers = (baseElementNumbers > 0) ? baseElementNumbers : 0;
+    output.baseBrickMortarWeight = (baseBrickMortarWeight > 0) ? baseBrickMortarWeight : 0;
+    output.baseBlockMortarWeight = (baseBlockMortarWeight > 0) ? baseBlockMortarWeight : 0;
+    output.baseGlueWeight = (baseGlueWeight > 0) ? baseGlueWeight : 0;
+    output.gapVolume = (gapVolume > 0) ? gapVolume.toFixed(3) : 0;
 
     /* update result */
     resultData.innerHTML += `<b>Вам потребуется:</b><br>`;
