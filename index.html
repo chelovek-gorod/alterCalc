@@ -47,6 +47,7 @@
             <div id="wallDataDiv">
                 <div id="facadeDiv">
                     <div class="title-calc-div">Фасад</div>
+                    <nobr>
                     <label for="selectFacadeBrickSize">Кирпич:
                         <select id="selectFacadeBrickSize" onchange="selectOnchange(this.id, this.value)">
                             <option value="250 60 65">0,5 НФ (250x60x65 мм)</option>
@@ -57,6 +58,7 @@
                             <option value="210 100 65">WDF (210x100x65 мм)</option>
                         </select>
                     </label> ,
+                    </nobr>
                     <label for="inputFacadeBrickSeam">шов:
                         <input type="number" id="inputFacadeBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
                     </label>
@@ -65,7 +67,7 @@
                     <div class="title-calc-div">Внутренняя кладка</div>
                     <div id="baseGap">
                         <label for="inputGapSize" onmouseover="changeVisualImageBaseSize()" onmouseleave="hideVisualImage()">Тепловой зазор между фасадом и стеной:
-                            <input type="number" id="inputGapSize" value="50" min="0" step="1" max="1000" onchange="inputNumberOnchange(this)"> мм
+                            <nobr><input type="number" id="inputGapSize" value="50" min="0" step="1" max="1000" onchange="inputNumberOnchange(this)"> мм</nobr>
                         </label>
                     </div>
                     <label for="radioBaseBrick" onmouseover="changeVisualImageBaseType('k')" onmouseleave="hideVisualImage()">
@@ -81,6 +83,7 @@
                         <span>Газосиликатный блок</span>
                     </label>
                     <div id="baseBrickDiv">
+                        <nobr>
                         <label for="selectBaseBrickSize">Кирпич: 
                             <select id="selectBaseBrickSize" onchange="selectOnchange(this.id, this.value)">
                                 <option selected value="250 120 65">250x120x65</option>
@@ -88,6 +91,8 @@
                                 <option value="250 120 140">250x120x140</option>
                             </select>  мм, 
                         </label>
+                        </nobr>
+                        <nobr>
                         <label for="selectBaseBrickWallSize">кладка:
                             <select id="selectBaseBrickWallSize" onchange="selectOnchange(this.id, this.value)">
                                 <option value="0.5">0,5 кирпича</option>
@@ -96,11 +101,13 @@
                                 <option value="2">2 кирпича</option>
                             </select>
                         </label> ,
+                        </nobr>
                         <label for="inputBaseBrickSeam">шов:
                             <input type="number" id="inputBaseBrickSeam" value="10" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
                         </label>
                     </div>
                     <div id="baseBlockCeramicDiv">
+                        <nobr>
                         <label for="selectBaseBlockCeramicSize">Размеры блока:
                             <select id="selectBaseBlockCeramicSize" onchange="selectOnchange(this.id, this.value)">
                                 <option selected value="380 250 219">Блоки 10,7 НФ (380x250x219 мм)</option>
@@ -109,11 +116,13 @@
                                 <option value="510 250 219">Блоки 14,3 НФ (510x250x219 мм)</option>
                             </select>
                         </label> ,
+                        </nobr>
                         <label for="inputBaseBlockCeramicSeam">шов:
                             <input type="number" id="inputBaseBlockCeramicSeam" value="15" min="10" step="1" max="50" onchange="inputNumberOnchange(this)"> мм
                         </label>
                     </div>
                     <div id="baseBlockSilicateDiv">
+                        <nobr>
                         <label for="selectBaseBlockSilicateSize">Размеры блока:
                             <select id="selectBaseBlockSilicateSize" onchange="selectOnchange(this.id, this.value)">
                                 <option value="625 250 250">625x250x250 мм</option>
@@ -123,6 +132,7 @@
                                 <option value="625 500 250">625x500x250 мм</option>
                             </select>
                         </label> ,
+                        </nobr>
                         <label for="inputBaseBlockSilicateSeam">шов:
                             <input type="number" id="inputBaseBlockSilicateSeam" value="3" min="2" step="1" max="15" onchange="inputNumberOnchange(this)"> мм
                         </label>
@@ -158,6 +168,11 @@
         <div id="landscapeOrientationShell"></div>
 
         <script src="js/main.js"></script>
+
+        <script src="pdfmake.min.js"></script><!-- need: pdfmake.min.js.map -->
+        <script src="vfs_fonts.js"></script>
+
+        <script src="getPDF.js"></script>
 
     </body>
 </html>
