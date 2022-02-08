@@ -52,7 +52,7 @@ const input = {
         depth : 380,
         height : 219
     },
-    inputBaseBlockCeramicSeam : 15,
+    inputBaseBlockCeramicSeam : 17,
 
     selectBaseBlockSilicateSize : {
         width : 625,
