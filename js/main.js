@@ -10,7 +10,7 @@ let getErrorIs = false;
 
 /* MORTARS */
 const facadeMortarKgPer1M3 = 2564.1;
-const baseBrickMortarKgPer1M3 = 1250;
+const baseBrickMortarKgPer1M3 = 687.0533;
 const baseBlockMortarKgPer1M3 = 687.0533;
 const baseGlueKgPer1M3 = 1508.01063;
 
