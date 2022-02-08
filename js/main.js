@@ -12,7 +12,7 @@ let getErrorIs = false;
 const facadeMortarKgPer1M3 = 2564.1;
 const baseBrickMortarKgPer1M3 = 1250;
 const baseBlockMortarKgPer1M3 = 687.0533;
-const baseGlueKgPer1M3 = 1913.776;
+const baseGlueKgPer1M3 = 1508.01063;
 
 let facadeMortarWeight = 0; // kg
 let baseBrickMortarWeight = 0; // kg
@@ -607,8 +607,12 @@ function countBaseElementNumbers(garretsSquare, holesSquare) {
             height : input.selectBaseBlockSilicateSize.height / 1000,
             seam : input.inputBaseBlockSilicateSeam / 1000
         }; console.log('--|||baseBlockSilicateSizeMeter', baseBlockSilicateSizeMeter);
+        console.log(baseBlockSilicateSizeMeter.width + baseBlockSilicateSizeMeter.seam + baseBlockSilicateSizeMeter.height);
+        console.log(baseBlockSilicateSizeMeter.depth * input.selectBaseBrickSize.seam);
+
+
         let baseMortarVolumePerBlockSilicate = (baseBlockSilicateSizeMeter.width + baseBlockSilicateSizeMeter.seam + baseBlockSilicateSizeMeter.height)
-            * baseBlockSilicateSizeMeter.depth * input.selectBaseBrickSize.depth;
+            * baseBlockSilicateSizeMeter.depth * baseBlockSilicateSizeMeter.seam;
         console.log('baseMortarVolumePerBlockSilicate =', baseMortarVolumePerBlockSilicate);
         baseGlueWeight = Math.ceil(baseElementNumbers * baseMortarVolumePerBlockSilicate * baseGlueKgPer1M3);
     } else {
