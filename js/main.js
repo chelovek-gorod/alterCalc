@@ -89,8 +89,9 @@ class Hole {
 }
 
 class Garret {
-    constructor(h1, w1, h2, w2, pcs) {
+    constructor(type, h1, w1, h2, w2, pcs) {
         this.key = 'garret-' + input.garretKeys++;
+        this.type = type;
         this.h1 = h1;
         this.h2 = h2;
         this.w1 = w1;
@@ -325,7 +326,8 @@ function addGarretType(type) {
 
     let h2 = (type == 3) ? 1.8 : 0;
     let w2 = (type == 3) ? 1.6 : 0;
-    input.garrets.push(new Garret(1.2, 0.8, h2, w2, 2));
+    let garretType = (type == 3) ? 4 : Number(type);
+    input.garrets.push(new Garret(garretType, 1.2, 0.8, h2, w2, 2));
 
     recalculate();
 }
@@ -460,7 +462,7 @@ function recalculate() {
         }
         if (input.radioBaseBlockCeramic === true) {
             resultData.innerHTML +=
-            `<br>Керамический блок ${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.height} мм: <b>${baseElementNumbers} шт.</b><br>
+            `<br>Керамический блок ${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.height} мм: <b>${baseElementNumbers} шт.</b><br>
             <b>${baseBlockMortarWeight} кг</b> теплоизоляционной кладочной смеси.<br>`;
         }
         if (input.radioBaseBlockSilicate === true) {

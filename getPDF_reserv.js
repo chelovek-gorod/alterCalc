@@ -8,6 +8,9 @@ const workTime = 'Пн. - Пт.: с 9:00 до 18:00';
 const phone1 = '+375 (33) 690-10-40';
 const phone2 = '+375 (29) 652-57-70';
 
+console.log(input);
+console.log(output);
+
 const docDefinition = {
 	content: [
 		
@@ -42,37 +45,138 @@ const docDefinition = {
 		},
 
 		{
-			text: 'Исходные данные', style: 'header', alignment: 'center', margin: [0, 24, 0, 0]
+			text: 'Исходные данные',
+			style: 'header',
+            alignment: 'center'
 		},
 
 		{
-			text: '---', alignment: 'center'
+			text: '---',
+            alignment: 'center'
 		},
 
 		{
-			text: 'Результаты рассчета', style: 'header', alignment: 'center', margin: [0, 24, 0, 0]
+			text: 'Результаты рассчета',
+			style: 'header',
+            alignment: 'center'
 		},
 
 		{
-			text: '---', alignment: 'center'
+			text: '---',
+            alignment: 'center'
 		},
 
 		{
 			image: 'imgGrayLine', width: 520, height: 2, margin: [0, 12, 0, 12]
 		},
 
+		'If you specify width, image will scale proportionally',
 		{
-			text: '---', style: 'quote', alignment: 'center'
+			image: 'imgLogo',
+			width: 27,
+			height: 10,
+		},
+		'If you specify both width and height - image will be stretched',
+		{
+			image: 'imgGrayLine',
+			width: 62,
+			height: 24,
+		},
+		'You can also fit the image inside a rectangle',
+		{
+			image: 'imgLogo',
+			fit: [100, 100],
+			pageBreak: 'after'
+		},
+		'and opacity is supported:',
+		{
+			image: 'imgLogo',
+			width: 150,
+			opacity: 0.5
+		},
+        {
+			text: 'This is a header, using header style',
+			style: 'header',
+            alignment: 'center'
+		},
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam.\n\n',
+		{
+			text: 'Subheader 1 - using subheader style',
+			style: 'subheader',
+            margin: [0, 190, 0, 80]
+		},
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.',
+		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam posset, eveniunt specie deorsus efficiat sermone instituendarum fuisse veniat, eademque mutat debeo. Delectet plerique protervi diogenem dixerit logikh levius probabo adipiscuntur afficitur, factis magistra inprobitatem aliquo andriam obiecta, religionis, imitarentur studiis quam, clamat intereant vulgo admonitionem operis iudex stabilitas vacillare scriptum nixam, reperiri inveniri maestitiam istius eaque dissentias idcirco gravis, refert suscipiet recte sapiens oportet ipsam terentianus, perpauca sedatio aliena video.\n\n',
+		{
+			text: 'It is possible to apply multiple styles, by passing an array. This paragraph uses two styles: quote and small. When multiple styles are provided, they are evaluated in the specified order which is important in case they define the same properties',
+			style: ['quote', 'small']
+		},
+        {text: '\n\nUnordered lists inside columns', style: 'header'},
+		{
+			columns: [
+				{
+					ul: [
+						'item 1',
+						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit',
+					]
+				},
+				{
+					ul: [
+						'item 1',
+						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit',
+					]
+				}
+			]
+		},
+		{text: '\n\nColored ordered list', style: 'header'},
+		{
+			color: 'blue',
+			ol: [
+				'item 1',
+				'item 2',
+				'item 3'
+			]
+		},
+		{text: '\n\nColored ordered list with own marker color', style: 'header'},
+		{
+			color: 'blue',
+			markerColor: 'red',
+			ol: [
+				'item 1',
+				'item 2',
+				'item 3'
+			]
 		}
 
 	],
 
     styles: {
-		headText: { fontSize: 10 },
-		headPhone: { fontSize: 13, bold: true },
-		header: { fontSize: 18, bold: true },
-		quote: { fontSize: 10, italics: true },
-        defaultStyle: { fontSize: 12 },
+		headText: {
+			fontSize: 10
+		},
+		headPhone: {
+			fontSize: 13,
+			bold: true
+		},
+		header: {
+			fontSize: 18,
+			bold: true
+		},
+		subheader: {
+			fontSize: 15,
+			bold: true
+		},
+		quote: {
+			italics: true
+		},
+		small: {
+			fontSize: 8
+		},
+        defaultStyle: {
+            fontSize: 12
+        },
+ 
 	},
 
 	images: {
@@ -91,90 +195,19 @@ function getPDF() {
 	updatePdfContent();
 
 	let newDate = new Date();
-	let day = ( +newDate.getDate() < 10 ) ? ( "0" + newDate.getDate()) : newDate.getDate(),
-		month = ( +newDate.getMonth() + 1 < 10 ) ? ( "0" + (newDate.getMonth() + 1)) : +newDate.getMonth() + 1,
+	let day = newDate.getDate(),
+		month = newDate.getMonth() + 1,
 		year = newDate.getFullYear(),
 		hours = newDate.getHours(),
-		minutes = (+newDate.getMinutes() + 1 < 10) ? ( "0" + (newDate.getMinutes() + 1)) : +newDate.getMinutes() + 1,
+		minutes = (+newDate.getMinutes() + 1 < 10) ? ( "0" + (newDate.getMinutes() + 1)) : newDate.getMinutes() + 1,
 		seconds = (+newDate.getSeconds() < 10) ? ("0" + newDate.getSeconds()) : newDate.getSeconds();
 
-    let timeStamp = year + "-" + month + "-" + day + " ( " + hours + "  : " + minutes + " : " + seconds + " )";
-	let fileName = 'AlterKirpich-' + year + "-" + month + "-" + day + "_(" + hours + "_" + minutes + "_" + seconds + ")";;
-
-    updatePdfContent(timeStamp);
+	let fileName = 'AlterKirpich-' + year + "-" + month + "-" + day + "(" + hours + ":" + minutes + ":" + seconds + ")"; // 2010-04-07(17:00:12)
 
 	pdfMake.createPdf(docDefinition).download(fileName);
 }
 
-function updatePdfContent(timeStamp) {
-
-	let linesInPDF = 36;
-
-	let inputText = '\n';
-	inputText += `Периметр сторения: ${input.inputPerimeterSize.toFixed(3)} м; Высота: ${input.inputHeightSize.toFixed(3)} м;\n`;
-	if(input.facadeIs === true) {
-		inputText += `\nФасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} мм; шов: ${input.inputFacadeBrickSeam} мм;\n`;
-		linesInPDF -= 2;
-		if(input.baseIs === true) { inputText += `\nТепловой зазор между фасадом и стеной: ${input.inputGapSize} мм;\n`; linesInPDF -= 2;}
-	}
-	if(input.baseIs === true) {
-		if(radioBaseBrick === true) {
-			inputText += `\nРядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} мм`;
-			inputText += ` кладка в ${input.selectBaseBrickWallSize (input.selectBaseBrickWallSize === 1) ? 'кирпич' : 'кирпича'}; шов: ${input.inputBaseBrickSeam} мм;\n`;
-			linesInPDF -= 2;
-		} 
-		if(radioBaseBlockCeramic === true) {
-			inputText += `\nКерамический блок ${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.height} мм`;
-			inputText += ` шов: ${input.inputBaseBlockCeramicSeam} мм;\n`;
-			linesInPDF -= 2;
-		}
-		if(radioBaseBlockSilicate === true) {
-			inputText += `\nГазосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} мм`;
-			inputText += ` шов: ${input.inputBaseBlockSilicateSeam} мм;\n`;
-			linesInPDF -= 2;
-		} 
-	}
-	if(input.holes.length > 0) { inputText += '\n'; linesInPDF--; }
-	input.holes.forEach(hole => {
-		inputText += `Проём ${hole.width}x${hole.height} м; количество : ${hole.pcs} шт.\n`;
-		linesInPDF--;
-	});
-	if(input.garrets.length > 0) { inputText += '\n'; linesInPDF--; }
-	input.garrets.forEach(garret => {
-		inputText += `Мансарда ${garret.type}-скатная: `;
-		inputText += ((garret.h1) ? 'h1=' + garret.h1 + 'м; ' : '') + ((garret.h2) ? 'h2=' + garret.h2 + 'м; ' : '') + ((garret.w1) ? 'L1=' + garret.w1 + 'м; ' : '') + ((garret.w2) ? 'L2=' + garret.w2 + 'м; ' : '');
-		inputText += ` количество : ${garret.pcs} шт.\n`;
-		linesInPDF--;
-	});
-
-	let outputText = '';
-	if (input.facadeIs === true) {
-        outputText += `\nФасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} мм: ${output.facadeBrickNumbers} шт.\n`;
-		outputText += `${output.facadeMortarWeight} кг цветной кладочной смеси для фасадного кирпича.\n`;
-		linesInPDF -= 2;
-    }
-    if (input.baseIs === true) {
-        if (input.radioBaseBrick === true) {
-            outputText += `\nРядовой кирпич ${input.selectBaseBrickSize.width}x${input.selectBaseBrickSize.depth}x${input.selectBaseBrickSize.height} мм: ${output.baseElementNumbers} шт.\n`;
-			outputText += `${output.baseBrickMortarWeight} кг теплоизоляционной кладочной смеси.\n`;
-			linesInPDF -= 3;
-        }
-        if (input.radioBaseBlockCeramic === true) {
-            outputText += `\nКерамический блок ${input.selectBaseBlockCeramicSize.depth}x${input.selectBaseBlockCeramicSize.width}x${input.selectBaseBlockCeramicSize.height} мм: ${output.baseElementNumbers} шт.\n`;
-            outputText += `${output.baseBlockMortarWeight} кг теплоизоляционной кладочной смеси.\n`;
-			linesInPDF -= 3;
-        }
-        if (input.radioBaseBlockSilicate === true) {
-            outputText += `\nГазосиликатный блок ${input.selectBaseBlockSilicateSize.width}x${input.selectBaseBlockSilicateSize.depth}x${input.selectBaseBlockSilicateSize.height} мм: `;
-			outputText += `${output.baseElementNumbers} шт.\n${output.baseGlueWeight} кг клея для газосиликатных блоков.\n`;
-			linesInPDF -= 3;
-        }
-    }
-    if (input.facadeIs === true && input.baseIs === true) { outputText += `\nОбъем теплового зазора: ${output.gapVolume} м3.\n`; linesInPDF -= 2; }
-
-	while(linesInPDF > 0) { outputText += '\n'; linesInPDF--; }
-
-	docDefinition.content[3].text = inputText;
-	docDefinition.content[5].text = outputText;
-    docDefinition.content[7].text = 'Расчет произведен на сайте alterkirpich.by ' + timeStamp;
+function updatePdfContent() {
+	docDefinition.content[3].text = 'Заменили исходные';
+	docDefinition.content[3].text = 'Заменили результат';
 }
