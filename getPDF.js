@@ -50,7 +50,7 @@ const docDefinition = {
 		},
 
 		{
-			text: 'Результаты рассчета', style: 'header', alignment: 'center', margin: [0, 24, 0, 0]
+			text: 'Результаты расчета', style: 'header', alignment: 'center', margin: [0, 24, 0, 0]
 		},
 
 		{
@@ -111,7 +111,7 @@ function updatePdfContent(timeStamp) {
 	let linesInPDF = 36;
 
 	let inputText = '\n';
-	inputText += `Периметр сторения: ${input.inputPerimeterSize.toFixed(3)} м; Высота: ${input.inputHeightSize.toFixed(3)} м;\n`;
+	inputText += `Периметр строения: ${input.inputPerimeterSize.toFixed(3)} м; Высота: ${input.inputHeightSize.toFixed(3)} м;\n`;
 	if(input.facadeIs === true) {
 		inputText += `\nФасадный кирпич ${input.selectFacadeBrickSize.width}x${input.selectFacadeBrickSize.depth}x${input.selectFacadeBrickSize.height} мм; шов: ${input.inputFacadeBrickSeam} мм;\n`;
 		linesInPDF -= 2;
